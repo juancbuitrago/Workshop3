@@ -11,17 +11,13 @@ def standardize_columns(df):
     return df
 
 def predict(data):
-    # Ensure the data is a dictionary
     if isinstance(data, str):
         data = loads(data)
         
-    # Create a DataFrame from the data of the message
     df = pd.DataFrame([data])
 
-    # Standardize column names
     df = standardize_columns(df)
 
-    # Predict using the loaded model
     prediction = model.predict(df.drop(columns=['happiness_score'], axis=1, errors='ignore'))
     df['prediction'] = prediction
 

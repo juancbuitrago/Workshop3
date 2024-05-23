@@ -2,7 +2,6 @@ import pandas as pd
 from sqlalchemy import create_engine, inspect
 import json
 
-# Load database configuration from the config file
 def load_config():
     try:
         with open('config.json', 'r') as config_file:
@@ -13,7 +12,6 @@ def load_config():
 
 config = load_config()
 
-# Assemble the DATABASE_URI from the config details
 user = config.get('user')
 password = config.get('password')
 host = config.get('host')
@@ -21,10 +19,8 @@ dbname = config.get('dbname')
 port = config.get('port')
 DATABASE_URI = f"postgresql://{user}:{password}@{host}:{port}/{dbname}"
 
-# Create the database engine
 engine = create_engine(DATABASE_URI)
 
-# Function to create the table if it doesn't exist
 def create_table(table_name):
     inspector = inspect(engine)
     if not inspector.has_table(table_name):
@@ -49,6 +45,5 @@ def create_table(table_name):
     else:
         print(f"Table '{table_name}' already exists.")
 
-# Function to load data into the table
 def load_data(df, table_name):
     df.to_sql(table_name, con=engine, if_exists='append', index=False)
