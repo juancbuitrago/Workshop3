@@ -21,6 +21,7 @@
         │   ├── X_test.csv
         │   └── y_test.csv
         ├── docs
+        │   └── documentation.pdf
         ├── models
         │   └── randomForest.pkl
         └── notebooks
